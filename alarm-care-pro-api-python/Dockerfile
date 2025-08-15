@@ -17,6 +17,10 @@ COPY app/ ./app/
 COPY alembic/ ./alembic/
 COPY alembic.ini .
 COPY .env .
+COPY run_migrations.sh .
+
+# Make migration script executable
+RUN chmod +x run_migrations.sh
 
 # Expose port
 EXPOSE 8000
@@ -25,5 +29,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD python -c "import requests; requests.get('http://localhost:8000/health')"
 
-# Run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the application with migrations
+CMD ["sh", "-c", "./run_migrations.sh && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

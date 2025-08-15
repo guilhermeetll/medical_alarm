@@ -61,17 +61,6 @@ services:
       - BACKEND_URL=http://backend:4444
     volumes:
       - ./alarm-care-pro-api-python/app:/app/app
-    command: >
-      sh -c "
-        sleep 15 &&
-        echo 'Waiting for PostgreSQL...' &&
-        until pg_isready -h postgres -p 5432 -U admin; do
-          sleep 1
-        done &&
-        echo 'PostgreSQL is ready!' &&
-        alembic upgrade head &&
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-      "
     restart: unless-stopped
 
   simulator-bomb:
