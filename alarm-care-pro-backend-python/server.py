@@ -252,4 +252,4 @@ if __name__ == '__main__':
         server_thread.start()
     
     print('Server running at 4444! 🚀')
-    socketio.run(app, host='0.0.0.0', port=4444, debug=False)
+    socketio.run(app, host='0.0.0.0', port=4444, debug=False, allow_unsafe_werkzeug=True)

@@ -26,6 +26,22 @@ services:
       - postgres
     restart: unless-stopped
 
+  backend:
+    build: ./alarm-care-pro-backend-python
+    container_name: alarm-care-pro-backend
+    ports:
+      - "4444:4444"
+      - "22001:22001"
+      - "22002:22002"
+      - "22003:22003"
+      - "23000:23000"
+      - "2222:2222"
+    depends_on:
+      - postgres
+    environment:
+      - HOST=0.0.0.0
+    restart: unless-stopped
+
   api:
     build: ./alarm-care-pro-api-python
     container_name: alarm-care-pro-api
@@ -33,6 +49,7 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+      - backend
     environment:
       - DATABASE_URL=postgresql://admin:admin@postgres:5432/alarm_app
       - SECRET_KEY=your-secret-key-change-this-in-production
@@ -41,6 +58,7 @@ services:
       - DEBUG=True
       - HOST=0.0.0.0
       - PORT=8000
+      - BACKEND_URL=http://backend:4444
     volumes:
       - ./alarm-care-pro-api-python/app:/app/app
     command: >
@@ -54,6 +72,67 @@ services:
         alembic upgrade head &&
         uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
       "
+    restart: unless-stopped
+
+  simulator-bomb:
+    build: ./alarm-care-pro-mae-simulator
+    container_name: alarm-care-pro-mae-simulator-bomb
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_HOST=backend
+      - BACKEND_PORT=22001
+    command: >
+      sh -c "
+        sleep 10 &&
+        yarn dev-bomb
+      "
+    restart: unless-stopped
+    profiles:
+      - simulator
+
+  simulator-monitor:
+    build: ./alarm-care-pro-mae-simulator
+    container_name: alarm-care-pro-mae-simulator-monitor
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_HOST=backend
+      - BACKEND_PORT=2222
+    command: >
+      sh -c "
+        sleep 10 &&
+        yarn dev-monitor
+      "
+    restart: unless-stopped
+    profiles:
+      - simulator
+
+  simulator-ventilator:
+    build: ./alarm-care-pro-mae-simulator
+    container_name: alarm-care-pro-mae-simulator-ventilator
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_HOST=backend
+      - BACKEND_PORT=23000
+    command: >
+      sh -c "
+        sleep 10 &&
+        yarn dev-ventilator
+      "
+    restart: unless-stopped
+    profiles:
+      - simulator
+
+  frontend:
+    build: ./app_frontend
+    container_name: alarm-care-pro-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+      - backend
     restart: unless-stopped
 
 volumes:
