@@ -40,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Username',
                     border: OutlineInputBorder(),
                     filled: true,
-                    fillColor: Color(0xFF16223a),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -57,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Password',
                     border: OutlineInputBorder(),
                     filled: true,
-                    fillColor: Color(0xFF16223a),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {

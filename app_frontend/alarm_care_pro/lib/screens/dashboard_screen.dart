@@ -107,7 +107,6 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildPumpsCard() {
     return Card(
-      color: const Color(0xFF16223a),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -166,7 +165,6 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildVentilatorCard() {
     return Card(
-      color: const Color(0xFF16223a),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -215,13 +213,12 @@ class DashboardScreen extends StatelessWidget {
                         return Container(
                           padding: const EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2c3e50),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Ventilator Alarm', style: TextStyle(color: Colors.white)),
+                              const Text('Ventilator Alarm'),
                               const SizedBox(height: 8),
                               Text(
                                 hasAlarm ? alarm.id : 'NO ALARMS',

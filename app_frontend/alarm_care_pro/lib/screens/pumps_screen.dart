@@ -42,7 +42,6 @@ class PumpsScreen extends StatelessWidget {
                   }
 
                   return Card(
-                    color: const Color(0xFF16223a),
                     margin: const EdgeInsets.all(8.0),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
