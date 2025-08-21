@@ -10,7 +10,6 @@ class MonitorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0a1931),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PatientVitalsProvider>(
@@ -60,7 +59,6 @@ class MonitorScreen extends StatelessWidget {
                       }
 
                       return Card(
-                        color: const Color(0xFF16223a),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
@@ -113,7 +111,7 @@ class MonitorScreen extends StatelessWidget {
           color: color,
         ),
         const SizedBox(width: 5),
-        Text(name, style: const TextStyle(color: Colors.white)),
+        Text(name),
       ],
     );
   }

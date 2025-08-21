@@ -9,10 +9,9 @@ class PumpsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0a1931),
       appBar: AppBar(
         title: const Text('Bombas de Infusão'),
-        backgroundColor: const Color(0xFF0a1931),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Consumer<InfusionPumpProvider>(
         builder: (context, provider, child) {
@@ -57,7 +56,6 @@ class PumpsScreen extends StatelessWidget {
                                 'Pump: ${pump.pumpSerialNumber}',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
                                   fontSize: 18,
                                 ),
                               ),
@@ -85,7 +83,6 @@ class PumpsScreen extends StatelessWidget {
                             child: Text(
                               'Updated: $formattedDate',
                               style: const TextStyle(
-                                color: Colors.white70,
                                 fontSize: 12,
                               ),
                             ),

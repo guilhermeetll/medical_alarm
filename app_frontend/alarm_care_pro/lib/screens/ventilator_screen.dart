@@ -6,7 +6,7 @@ import '../widgets/ventilator_variable_card.dart';
 class VentilatorScreen extends StatelessWidget {
   const VentilatorScreen({super.key});
 
-  Color _getAlarmColor(String? priority) {
+  Color _getAlarmColor(BuildContext context, String? priority) {
     switch (priority) {
       case 'HI':
         return Colors.red.shade700;
@@ -15,7 +15,7 @@ class VentilatorScreen extends StatelessWidget {
       case 'LOW':
         return Colors.blue.shade700;
       default:
-        return const Color(0xFF0a1931);
+        return Theme.of(context).scaffoldBackgroundColor;
     }
   }
 
@@ -23,9 +23,8 @@ class VentilatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<VentilatorProvider>(
       builder: (context, provider, child) {
-        final alarmColor = _getAlarmColor(provider.currentAlarm?.priority);
+        final alarmColor = _getAlarmColor(context, provider.currentAlarm?.priority);
         return Scaffold(
-          backgroundColor: const Color(0xFF0a1931),
           appBar: AppBar(
             title: const Text('Ventilador'),
             backgroundColor: alarmColor,
@@ -43,7 +42,6 @@ class VentilatorScreen extends StatelessWidget {
                       Text(
                         provider.currentAlarm!.id,
                         style: const TextStyle(
-                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),

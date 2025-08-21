@@ -8,10 +8,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0a1931),
       appBar: AppBar(
         title: const Text('Settings'),
-        backgroundColor: const Color(0xFF0a1931),
         elevation: 0,
       ),
       body: Padding(
@@ -23,8 +21,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 const Text(
                   'Volume',
-                  style: TextStyle(
-                    color: Colors.white,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -39,7 +36,6 @@ class SettingsScreen extends StatelessWidget {
                 SwitchListTile(
                   title: const Text(
                     'Mute',
-                    style: TextStyle(color: Colors.white),
                   ),
                   value: settings.isMuted,
                   onChanged: (value) {
@@ -50,7 +46,6 @@ class SettingsScreen extends StatelessWidget {
                 SwitchListTile(
                   title: const Text(
                     'Light Mode',
-                    style: TextStyle(color: Colors.white),
                   ),
                   value: !settings.isDarkMode,
                   onChanged: (value) {

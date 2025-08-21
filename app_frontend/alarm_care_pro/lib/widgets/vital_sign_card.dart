@@ -10,7 +10,6 @@ class VitalSignCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color(0xFF0a1931),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -18,7 +17,7 @@ class VitalSignCard extends StatelessWidget {
           children: [
             Text(
               variable.name,
-              style: const TextStyle(color: Colors.white70, fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 5),
             Text(
@@ -31,7 +30,7 @@ class VitalSignCard extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               variable.unit,
-              style: const TextStyle(color: Colors.white70, fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ],
         ),

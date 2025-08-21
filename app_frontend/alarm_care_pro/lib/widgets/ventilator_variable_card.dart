@@ -9,7 +9,6 @@ class VentilatorVariableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color(0xFF16223a),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -19,7 +18,6 @@ class VentilatorVariableCard extends StatelessWidget {
               variable.name,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Colors.white70,
                 fontSize: 14,
               ),
             ),
@@ -36,7 +34,6 @@ class VentilatorVariableCard extends StatelessWidget {
             Text(
               variable.unit,
               style: const TextStyle(
-                color: Colors.white70,
                 fontSize: 12,
               ),
             ),

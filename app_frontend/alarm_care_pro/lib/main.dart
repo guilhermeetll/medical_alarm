@@ -34,7 +34,27 @@ class AlarmCareProApp extends StatelessWidget {
         builder: (context, auth, settings, _) {
           return MaterialApp(
             title: 'AlarmCare Pro',
-            theme: settings.isDarkMode ? ThemeData.dark() : ThemeData.light(),
+            theme: settings.isDarkMode
+      ? ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: const Color(0xFF0a1931),
+          cardColor: const Color(0xFF16223a),
+          primaryColor: Colors.blue,
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(color: Colors.white),
+            bodyMedium: TextStyle(color: Colors.white70),
+            bodySmall: TextStyle(color: Colors.white70),
+          ),
+        )
+      : ThemeData.light().copyWith(
+          scaffoldBackgroundColor: Colors.white,
+          cardColor: Colors.grey[200],
+          primaryColor: Colors.blue,
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(color: Colors.black),
+            bodyMedium: TextStyle(color: Colors.black87),
+            bodySmall: TextStyle(color: Colors.black54),
+          ),
+        ),
             home: auth.isLoading
                 ? const Scaffold(body: Center(child: CircularProgressIndicator()))
                 : auth.isAuthenticated

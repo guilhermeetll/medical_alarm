@@ -11,11 +11,9 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0a1931),
-      appBar: AppBar(
+  appBar: AppBar(
         title: const Text('Alarm Panel - Bed 20'),
-        backgroundColor: const Color(0xFF0a1931),
-        elevation: 0,
+    elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -69,7 +67,6 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _buildVitalsCard() {
     return Card(
-      color: const Color(0xFF16223a),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -77,14 +74,14 @@ class DashboardScreen extends StatelessWidget {
           children: [
             const Text(
               'Vital Signs Monitor - Prolife PRO 12®',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             Expanded(
               child: Consumer<PatientVitalsProvider>(
                 builder: (context, provider, child) {
                   if (provider.variables.isEmpty) {
-                    return const Center(child: Text('No vital signs data.', style: TextStyle(color: Colors.white70)));
+                    return const Center(child: Text('No vital signs data.'));
                   }
                   return GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -118,14 +115,14 @@ class DashboardScreen extends StatelessWidget {
           children: [
             const Text(
               'Infusion Pumps - Samtronic Icatu 4.0®',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             Expanded(
               child: Consumer<InfusionPumpProvider>(
                 builder: (context, provider, child) {
                   if (provider.pumps.isEmpty) {
-                    return const Center(child: Text('No infusion pump data.', style: TextStyle(color: Colors.white70)));
+                    return const Center(child: Text('No infusion pump data.'));
                   }
                   return ListView.builder(
                     itemCount: provider.pumps.length,
@@ -137,13 +134,12 @@ class DashboardScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(12.0),
                         margin: const EdgeInsets.only(bottom: 8.0),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2c3e50),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Alarm - Pump ${pump.pumpSerialNumber}', style: const TextStyle(color: Colors.white)),
+                            Text('Alarm - Pump ${pump.pumpSerialNumber}'),
                             Row(
                               children: [
                                 Text(
@@ -178,7 +174,7 @@ class DashboardScreen extends StatelessWidget {
           children: [
             const Text(
               'Mechanical Ventilator - Tecme graphnet ts+®',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             Expanded(
@@ -190,7 +186,7 @@ class DashboardScreen extends StatelessWidget {
                     child: Consumer<VentilatorProvider>(
                       builder: (context, provider, child) {
                         if (provider.variables.isEmpty) {
-                          return const Center(child: Text('No ventilator data.', style: TextStyle(color: Colors.white70)));
+                          return const Center(child: Text('No ventilator data.'));
                         }
                         return GridView.builder(
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
