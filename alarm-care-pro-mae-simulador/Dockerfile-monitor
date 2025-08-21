@@ -1,0 +1,28 @@
+# Use official Node.js 18 LTS image
+FROM node:18
+
+# Set working directory
+WORKDIR /app
+
+# ✅ PASSO 1: Configure Corepack para Yarn 4.7.0
+RUN corepack enable && \
+    corepack prepare yarn@4.7.0 --activate
+
+# ✅ PASSO 2: COPIE .yarnrc.yml PRIMEIRO (crucial!)
+COPY .yarnrc.yml ./
+
+# ✅ PASSO 3: Instale o tsx com npm (agora compatível)
+RUN npm install -g tsx@latest
+
+# ✅ PASSO 4: Configure dependências do projeto
+COPY package.json yarn.lock ./
+RUN yarn install --immutable
+
+# ✅ PASSO 5: Copie código-fonte
+COPY . .
+
+COPY wait-for-it.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/wait-for-it.sh
+
+# ✅ PASSO 6: Execute
+CMD ["tsx", "./src/monitorClient.ts"]
