@@ -64,7 +64,9 @@ services:
     restart: unless-stopped
 
   simulator-bomb:
-    build: ./alarm-care-pro-mae-simulator
+    build:
+      context: ./alarm-care-pro-mae-simulator
+      dockerfile: Dockerfile-bomb
     container_name: alarm-care-pro-mae-simulator-bomb
     depends_on:
       - backend
@@ -72,16 +74,14 @@ services:
       - BACKEND_HOST=backend
       - BACKEND_PORT=22001
     command: >
-      sh -c "
-        sleep 10 &&
-        yarn dev-bomb
-      "
-    restart: unless-stopped
+      sh -c "wait-for-it.sh backend:22001 -- tsx ./src/bombClient.ts"
     profiles:
       - simulator
 
   simulator-monitor:
-    build: ./alarm-care-pro-mae-simulator
+    build:
+      context: ./alarm-care-pro-mae-simulator
+      dockerfile: Dockerfile-monitor
     container_name: alarm-care-pro-mae-simulator-monitor
     depends_on:
       - backend
@@ -89,16 +89,15 @@ services:
       - BACKEND_HOST=backend
       - BACKEND_PORT=2222
     command: >
-      sh -c "
-        sleep 10 &&
-        yarn dev-monitor
-      "
+      sh -c "wait-for-it.sh backend:2222 -- tsx ./src/monitorClient.ts"
     restart: unless-stopped
     profiles:
       - simulator
 
   simulator-ventilator:
-    build: ./alarm-care-pro-mae-simulator
+    build:
+      context: ./alarm-care-pro-mae-simulator
+      dockerfile: Dockerfile-ventilador
     container_name: alarm-care-pro-mae-simulator-ventilator
     depends_on:
       - backend
@@ -106,10 +105,7 @@ services:
       - BACKEND_HOST=backend
       - BACKEND_PORT=23000
     command: >
-      sh -c "
-        sleep 10 &&
-        yarn dev-ventilator
-      "
+      sh -c "wait-for-it.sh backend:23000 -- tsx ./src/ventilatorClient.ts"
     restart: unless-stopped
     profiles:
       - simulator
