@@ -3,7 +3,7 @@ import '../services/sound_service.dart';
 
 class SettingsProvider with ChangeNotifier {
   final SoundService _soundService = SoundService();
-  bool _isDarkMode = true;
+  bool _isDarkMode = false;
 
   double get volume => _soundService.volume;
   bool get isMuted => _soundService.isMuted;
